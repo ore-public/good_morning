@@ -1,3 +1,5 @@
+HelloMessages = new Meteor.Collection('hello_messages')
+
 if Meteor.is_server
   Meteor.startup ->
     Meteor.methods(
@@ -5,8 +7,11 @@ if Meteor.is_server
     )
 
 if Meteor.is_client
+  Template.message_area.messages = ->
+    HelloMessages.find({})
+
   Meteor.startup ->
     name = document.getElementById('name')
     $('#button').click =>
       Meteor.call 'hello', name.value, (error, result) ->
-        alert(result)
+        HelloMessages.insert(message: result)

@@ -6,4 +6,14 @@
   名前:
   <input id="name" autofocus>
   <button id="button">クリック</button>
+  <hr />
+  {{> message_area}}
 </body>
+
+<template name="message_area">
+  {{#each messages}}
+    <div id="message">
+      {{message}}
+    </div>
+  {{/each}}
+</template>
